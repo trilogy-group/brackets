@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+displayUsage() {
+      cat $BASEDIR/devspaces-cli.hlp 2>/dev/null || true
+}
+
+BASEDIR=$(dirname $(readlink -f $0))
+PROJECTDIR=$BASEDIR/..
+COMMAND="$1"
+COLLECTION_YAML=brackets-collection.yaml
+COLLECTION_NAME=brackets
+
+pushd $BASEDIR
+
+case `awk '{print tolower($0)}' <<< "$COMMAND"` in
+	start)
+        cndevspaces collections create -f $BASEDIR/$COLLECTION_YAML
+        cd $PROJECTDIR
+        cndevspaces bind -C $COLLECTION_NAME -c $COLLECTION_NAME-cfg -v
+        cndevspaces info 
+        cd $BASEDIR
+	;;
+	build|create)
+        cndevspaces collections create -f $BASEDIR/$COLLECTION_YAML
+	;;
+	update)
+        cndevspaces collections update -f $BASEDIR/$COLLECTION_YAML
+	;;
+	up|bind)
+        cd $PROJECTDIR
+        cndevspaces bind -C $COLLECTION_NAME -c $COLLECTION_NAME-cfg -v
+        cd $BASEDIR
+	;;
+	exec)
+        cndevspaces exec -r $COLLECTION_NAME-dev
+	;;
+	stop)
+        cndevspaces stop -C $COLLECTION_NAME
+	;;
+	unbind)
+        cndevspaces unbind -C $COLLECTION_NAME -c $COLLECTION_NAME-cfg
+	;;
+	delete)
+        cndevspaces collections delete $COLLECTION_NAME
+	;;
+	down)
+        cndevspaces unbind -C $COLLECTION_NAME -c $COLLECTION_NAME-cfg
+        cndevspaces collections delete $COLLECTION_NAME
+	;;	
+	info)
+        cd $PROJECTDIR
+        cndevspaces info
+        cd $BASEDIR
+	;;	
+	*) displayUsage; exit 139
+	;;
+esac

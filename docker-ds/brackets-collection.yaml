@@ -1,0 +1,24 @@
+version: '2'
+name: brackets
+
+images:
+- name: brackets-img
+  url:  registry2.swarm.devfactory.com/devfactory/brackets/brackets-ds:v1
+  
+configs:
+- name: brackets-cfg
+  containers:
+  - name: brackets-dev
+    image: brackets-img
+    command:
+    - tail
+    args:
+    - -f
+    - /dev/null
+    volumes:
+    - host_path: ''
+      container_path: /data
+    ports:
+    # Reserved remote debugging port
+    - port: 5005
+      protocol: TCP
