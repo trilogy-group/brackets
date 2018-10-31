@@ -1,0 +1,27 @@
+Create the collection and Bind to the DevSpaces development collections: 
+  devspaces-cli start
+
+Create the DevSpaces development collections: 
+  devspaces-cli [create|build]
+
+Update DevSpaces development collections: 
+  devspaces-cli update
+
+Bind and start the DevSpaces development collections: 
+  devspaces-cli [bind|up]
+  
+Conect to the DevSpaces development collections: 
+  devspaces-cli exec
+
+Stop the DevSpaces development collections: 
+  devspaces-cli stop
+
+Delete the DevSpaces development collections: 
+  devspaces-cli delete
+  
+Stop and remove the DevSpaces development collections: 
+  devspaces-cli down
+
+Obtain information for DevSpaces development collections: 
+  devspaces-cli info
+

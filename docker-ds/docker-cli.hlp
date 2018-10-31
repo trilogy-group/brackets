@@ -1,0 +1,21 @@
+Build the Docker image: 
+  docker-cli build|create
+
+Start the development container: 
+  docker-cli up|bind
+
+Build and Start the development container: 
+  docker-cli start
+
+Conect to the development container: 
+  docker-cli exec
+
+Get the Info of the development container: 
+  docker-cli info
+
+  Stop the development container: 
+  docker-cli stop
+
+Shutdown and remove the development container: 
+  docker-cli down|delete
+

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+displayUsage() {
+      cat $BASEDIR/docker-cli.hlp 2>/dev/null || true
+}
+
+BASEDIR=$(dirname $(readlink -f $0))
+COMMAND="$1"
+OPTION_DS="$2"
+DEV_IMAGE=brackets-dev
+
+pushd $BASEDIR
+
+case `awk '{print tolower($0)}' <<< "$COMMAND"` in
+	start)
+        docker-compose -f $BASEDIR/docker-compose.yml up --build -d
+        docker ps | grep $DEV_IMAGE
+	;;
+	build|create)
+		docker-compose -f $BASEDIR/docker-compose.yml build
+	;;
+	up|bind)
+		docker-compose -f $BASEDIR/docker-compose.yml up -d
+		docker ps | grep $DEV_IMAGE
+	;;
+	exec)
+		docker-compose -f $BASEDIR/docker-compose.yml exec $DEV_IMAGE bash
+	;;
+	down|delete)
+		docker-compose -f $BASEDIR/docker-compose.yml down
+	;;	
+	stop)
+		docker-compose -f $BASEDIR/docker-compose.yml stop
+	;;
+	info)
+		docker ps | grep $DEV_IMAGE
+	;;
+	*) displayUsage; exit 139
+	;;
+esac
