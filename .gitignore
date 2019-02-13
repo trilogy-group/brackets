@@ -63,3 +63,8 @@ package-lock.json
 
 # Files build by scripts
 /src/thirdparty/semver.browser.js
+
+# DevSpaces
+.stversions
+.stignore
+.stfolder
