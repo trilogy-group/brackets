@@ -34,7 +34,7 @@ Please, follow these steps to create a new DevSpace and build the Brackets proje
 
         devspaces exec Brackets
 
-### Build and Run Brackets
+### Build and Test Brackets
 
 1. First, you need the source code inside the container. There are two approaches to get that: clone the repository inside the container (a) or bind the local repository with the container (b). 
 
@@ -57,8 +57,7 @@ Please, follow these steps to create a new DevSpace and build the Brackets proje
 
                 devspaces bind Brackets
 
-    * Wait to get all files synced. To see if the sync is finished, open a browser and access http://localhost:49152/. You will see a page like the one below. If the sync is finished, you will see the **Up to date** green message next to the **Remote Device** block.
-    * When you get the sync up to date, everything that is changed, deleted or created inside the local folder or in the `/data` folder inside the container will be synced. The sync is bidirectional. 
+    * Wait to get all files synced. When you get the sync up to date, everything that is changed, deleted or created inside the local folder or in the `/data` folder inside the container will be synced. The sync is bidirectional. 
     * **Note:** If you want to stop the bind, just move to the bonded folder and run the command:
 
                 devspaces unbind Brackets
